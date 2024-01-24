@@ -13,10 +13,12 @@ const addTodo = () => {
   todos.value.push({
     content: input_content.value,
     category: input_category.value,
+    done: false,
   })
 
   input_content.value = ''
   input_category.value = null
+
   //console.log(todos)
 
 }
@@ -57,11 +59,23 @@ const addTodo = () => {
 
         </div>
 
+        <input type="submit" value="Add Todo" />
       </form>
     </section>
 
     <section class="todo-list">
-
+      <div class="list">
+        <div v-for="todo in todos" :class="`todo-item ${todo.done ? 'done' : 'not-done'}`" :key="todo">
+        <label>
+          <input type="checkbox" v-model="todo.done" />
+          <span :class="`bubble ${todo.category}`"></span>
+        </label>
+        <div class="todo-content">
+          <input type="text" v-model="todo.content" />
+        </div>
+        
+        </div>
+      </div>
     </section>
   </main>
 </template>
